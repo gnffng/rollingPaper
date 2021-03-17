@@ -215,7 +215,7 @@
                             <form action="{% url 'rollingPaper:sign' %}" method='post' name="fm" class="sc-ikXwZx hwCNyq">
                                 {% csrf_token %}
                                 <input placeholder="15138296" class="sc-uxeQQ jHEhAp" name="idBoard" value="">
-                                <a onclick="document.fm.submit()"><div class="sc-biJoGX gtjlvQ">입장</div></a>
+                                <a onclick="if(document.getElementsByName('idBoard')[0].value.length!=0){document.fm.submit()}else{alert('게시글 번호를 입력해주세요.')}"><div class="sc-biJoGX gtjlvQ">입장</div></a>
                             </form>
                         </div>
                     </div>
@@ -223,7 +223,7 @@
                         <div class="sc-EZpBh fBAwDM">
                             <p class="sc-jXcwIi jyCgFD">문의번호 : 010-8445-4677 ㅣ 이메일 : gnffng@naver.com</p>
                             <p class="sc-jXcwIi jyCgFD">충청북도 충주시 소망부동산</p>
-                            <p class="sc-jXcwIi jyCgFD">(Created By DJango)</p>
+                            <p class="sc-jXcwIi jyCgFD">(Created By Bong)</p>
                         </div>
                     </div>
                 </section>
