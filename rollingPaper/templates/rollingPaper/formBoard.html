@@ -1,0 +1,26 @@
+{% extends 'rollingPaper/base.html' %}
+{% block content %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/formBoard.css' %}">
+    <div class="sc-jQAyEw flameU">
+        <div class="sc-dkQUut fKLEUn">
+            <p class="sc-WZYaI hciJwR">방이름과 비밀번호를
+                <span class="sc-bXevSJ fwjTzB">입력하고,</span>
+                생성버튼을
+                <span class="sc-bXevSJ fwjTzB">눌러</span>주세요.
+            </p>
+            <div>
+                <form action="{% url 'rollingPaper:sign' %}" method='post' name="fm" class="hwCNyq">
+                    {% csrf_token %}
+                    <input placeholder="방이름" class="jHEhAw" name="txtName" value="">
+                    <input placeholder="비밀번호" type="password" class="jHEhAw" name="pwBoard" value="">
+                    <div style="display: flex;">
+                        <input placeholder="비밀번호 확인" type="password" class="jHEhAp" name="dblPwBoard" value="">
+                        <a onclick="if(document.getElementsByName('pwBoard')[0].value==document.getElementsByName('dblPwBoard')[0].value){document.fm.submit()}else{alert('비밀번호가 일치하지 않습니다.')}"><div class="sc-biJoGX gtjlvQ">생성</div></a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
