@@ -26,7 +26,7 @@ SECRET_KEY = '3-!s^)6pcil!4ak+e&@9a(ui607pcuaiyy-@nvk@(p2b1@m$jv'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["rollingpaper.ddns.net", "127.0.0.1", "192.168.219.100", "localhost"]
 
 
 # Application definition
