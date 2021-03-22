@@ -1,64 +1,97 @@
+{% load rollingPaper_extras %}
 <html lang="ko">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=3,minimum-scale=1,user-scalable=no,viewport-fit=cover">
-  <style data-styled="active" data-styled-version="5.2.0">
-  </style>
-  {% load static %}
-  <link rel="stylesheet" href="{% static 'css/base.css' %}">
-  {% load static %}
-  <link rel="stylesheet" href="{% static 'css/list.css' %}">
-  <link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&amp;family=Hi+Melody&amp;family=Nanum+Brush+Script&amp;family=Nanum+Gothic&amp;display=swap" rel="stylesheet" type="text/css" data-react-helmet="true">
-</head>
-<body class="">
-<div id="wrap">
-	<div class="sc-amjdv bckYVV">
-		<div class="sc-WZYaI hciJwR">
-			<div class="sc-dFRpvv cQoJBr bg">
-				<div class="sc-lmgQde ZlFdb" style="transform: translateY(0px);">
-					<div class="sc-giAqnE bfNSsg">
-						<h1 class="sc-bYwzba bNLeWO">To. 123</h1>
-            {% load static %}
-						<img src="{% static 'img/btn_menu.svg' %}" class="sc-kLokih cgnnmn">
-					</div>
-					<div class="sc-iJCRLp hLvDVx">
-					</div>
-				</div>
+	<head>
+	  <meta charset="UTF-8">
+	  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+	  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=3,minimum-scale=1,user-scalable=no,viewport-fit=cover">
+	  <style data-styled="active" data-styled-version="5.2.0">
+	  </style>
+	  {% load static %}
+	  <link rel="stylesheet" href="{% static 'css/base.css' %}">
+	  {% load static %}
+	  <link rel="stylesheet" href="{% static 'css/list.css' %}">
+	  <link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&amp;family=Hi+Melody&amp;family=Nanum+Brush+Script&amp;family=Nanum+Gothic&amp;display=swap" rel="stylesheet" type="text/css" data-react-helmet="true">
+	</head>
+	<body class="">
+		<div id="wrap">
+			<div class="sc-amjdv bckYVV">
+				<div class="sc-WZYaI hciJwR">
+					<div class="sc-dFRpvv cQoJBr bg">
+						<div class="sc-lmgQde ZlFdb" style="transform: translateY(0px);">
+							<div class="sc-giAqnE bfNSsg">
+								<h1 class="sc-bYwzba bNLeWO">To. {{board_name}}</h1>
+								{% load static %}
+								<img src="{% static 'img/btn_menu.svg' %}" class="sc-kLokih cgnnmn" onclick="document.getElementsByClassName('hugGxG')[0].style.display='block'">
+							</div>
+							<div class="sc-iJCRLp hLvDVx">
+							</div>
+						</div>
 
-        <div class="sc-hHEjAm hugGxG" style="display:none">
-        	<div class="sc-dlMBXb eXQdyn" style="transform: translateX(-248px);">
-            {% load static %}
-        		<img src="{% static 'img/btn_close.svg' %}" class="sc-kfYqjs jpcbJh">
-        		<h2 class="sc-fKgIGh efpGaJ">메인 홈</h2>
-        		<h2 id="kakao-link-btn" class="sc-fKgIGh efpGaJ">공유하기</h2>
-        		<div class="sc-bCwgka kQzQQm">
-        		</div>
-        		<h4 class="sc-iwaifL gSkynp">롤링페이퍼 소개</h4>
-        		<h4 class="sc-iwaifL gSkynp">문의하기</h4>
-        	</div>
-        </div>
+						<div class="sc-hHEjAm hugGxG" style="display:none">
+							<div class="sc-dlMBXb eXQdyn" style="transform: translateX(-248px);">
+							{% load static %}
+								<img src="{% static 'img/btn_close.svg' %}" class="sc-kfYqjs jpcbJh" onclick="document.getElementsByClassName('hugGxG')[0].style.display='none'">
+								<a href="{% url 'rollingPaper:main' %}"><h2 class="sc-fKgIGh efpGaJ">메인 홈</h2></a>
+								<h2 id="kakao-link-btn" class="sc-fKgIGh efpGaJ">공유하기</h2>
+								<div class="sc-bCwgka kQzQQm">
+								</div>
+								<h4 class="sc-iwaifL gSkynp">롤링페이퍼 소개</h4>
+								<h4 class="sc-iwaifL gSkynp">문의하기</h4>
+							</div>
+						</div>
 
-				<div class="sc-iklIKw hkyHSX" style="opacity: 1;">
-					0개 작성
-				</div>
-				<section class="sc-daBvwG gTaSYg card"><section class="sc-pNWxx dryRrI">
-				<div class="sc-jrsJCI hxuTcC">
-					글을 추가해주세요!
-				</div>
-				</section></section>
-				<div class="sc-fuIRbl fKFrpF" style="opacity: 1;">
-					<div class="sc-Gvgqn emVMzr">
-						<svg width="48" height="48" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#232323"><path d="M35 24.34V16.66C35 14.64 33.36 13 31.34 13H16.66C14.64 13 13 14.64 13 16.66V31.34C13 33.36 14.64 35 16.66 35H24.34L35 24.34Z" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path><path d="M24.5 34.5L34.58 24.42C34.92 24.08 34.68 23.5 34.2 23.5H28.16C26.14 23.5 24.5 25.14 24.5 27.16V34.5ZM24.5 34.5C24.5 34.91 24.21 34.79 24.5 34.5Z" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path><path d="M20.5 20.5C20.5 21.0523 20.0523 21.5 19.5 21.5C18.9477 21.5 18.5 21.0523 18.5 20.5C18.5 19.9477 18.9477 19.5 19.5 19.5C20.0523 19.5 20.5 19.9477 20.5 20.5Z" fill="#232323"></path><path d="M29.5 20.5C29.5 21.0523 29.0523 21.5 28.5 21.5C27.9477 21.5 27.5 21.0523 27.5 20.5C27.5 19.9477 27.9477 19.5 28.5 19.5C29.0523 19.5 29.5 19.9477 29.5 20.5Z" fill="#232323"></path><path d="M18 26C18 26 18.46 31 24 31" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-					</div>
-					<div class="sc-Gvgqn sc-gsWdvU emVMzr sScsW">
-            {% load static %}
-						<img src="{% static 'img/btn_write.svg' %}" alt="페이퍼 추가" class="sc-bXevSJ fwjTzB">
+						<div class="sc-iklIKw hkyHSX" style="opacity: 1;">
+							{{post|length}}개 작성
+						</div>
+						<section class="sc-daBvwG gTaSYg card">
+							{% if post|length == 0 %}
+							<section class="sc-pNWxx dryRrI">
+								<div class="sc-jrsJCI hxuTcC">
+									글을 추가해주세요!
+								</div>
+							</section>
+							{% else %}
+							<div class="sc-jQAyEw dQaUcS card-wrapper">
+								{% for message in post %}
+									<div transform="rotate(5deg) translateX(7px) translateY(7px)" id="3209056"
+										 {% if forloop.counter0|mod:4 == 1 or forloop.counter0|mod:4 == 2 %}
+											class="sc-dlnjPT fnbVmG2"
+										 {% else %}
+											class="sc-dlnjPT fnbVmG"
+										 {% endif %}>
+										<div font-family="Hi Melody" color="#000000" class="sc-hKFyIo iqCTcf">
+											{{message.contents|truncatechars:"55"}}
+										</div>
+									</div>
+								{% endfor %}
+								<div class="sc-eKYRpg hCEyrj sentinel"></div>
+							</div>
+							{% endif %}
+						</section>
+						<div class="sc-fuIRbl fKFrpF" style="opacity: 1;">
+							<div class="sc-Gvgqn emVMzr">
+								<svg width="48" height="48" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#232323"><path d="M35 24.34V16.66C35 14.64 33.36 13 31.34 13H16.66C14.64 13 13 14.64 13 16.66V31.34C13 33.36 14.64 35 16.66 35H24.34L35 24.34Z" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path><path d="M24.5 34.5L34.58 24.42C34.92 24.08 34.68 23.5 34.2 23.5H28.16C26.14 23.5 24.5 25.14 24.5 27.16V34.5ZM24.5 34.5C24.5 34.91 24.21 34.79 24.5 34.5Z" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path><path d="M20.5 20.5C20.5 21.0523 20.0523 21.5 19.5 21.5C18.9477 21.5 18.5 21.0523 18.5 20.5C18.5 19.9477 18.9477 19.5 19.5 19.5C20.0523 19.5 20.5 19.9477 20.5 20.5Z" fill="#232323"></path><path d="M29.5 20.5C29.5 21.0523 29.0523 21.5 28.5 21.5C27.9477 21.5 27.5 21.0523 27.5 20.5C27.5 19.9477 27.9477 19.5 28.5 19.5C29.0523 19.5 29.5 19.9477 29.5 20.5Z" fill="#232323"></path><path d="M18 26C18 26 18.46 31 24 31" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+							</div>
+							<div class="sc-Gvgqn sc-gsWdvU emVMzr sScsW">
+								{% load static %}
+								<img src="{% static 'img/btn_write.svg' %}" alt="페이퍼 추가" class="sc-bXevSJ fwjTzB">
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-</div>
-</body>
+	<script>
+		jQuery('#kakao-link-btn').click(function() {
+		  var t = document.createElement("textarea");
+		  document.body.appendChild(t);
+		  t.value = window.location.href;
+		  t.select();
+		  document.execCommand('copy');
+		  document.body.removeChild(t);
+		  alert('클립보드에 복사되었습니다!');
+		});
+	</script>
+	</body>
 </html>

@@ -4,12 +4,19 @@
         <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=3,minimum-scale=1,user-scalable=no,viewport-fit=cover">
         <title>롤링페이퍼, 우리가 만들어가는 이야기</title>
         {% load static %}
+        <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
         <link rel="stylesheet" href="{% static 'css/base.css' %}">
         <link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&amp;family=Hi+Melody&amp;family=Nanum+Brush+Script&amp;family=Nanum+Gothic&amp;display=swap" rel="stylesheet" type="text/css" data-react-helmet="true">
         <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;400;700&amp;display=swap" rel="stylesheet" type="text/css" data-react-helmet="true">
     </head>
     <body class="">
-        <script> {% if msg %} alert('{{msg}}'); {% endif %} </script>
+        <script>{% if msg %} alert('{{msg}}'); {% endif %}
+            var url = new URL(window.location.href);
+            var msg = url.searchParams.get("msg")
+            if(msg!=null){
+                alert(msg);
+            }
+        </script>
         <div id="wrap">
             <div class="sc-amjdv bckYVV">
                 <section class="sc-ljslrt rASkO">

@@ -102,6 +102,66 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
     align-items: center;
 }
 
+.dQaUcS {
+    position: absolute;
+    width: 100%;
+    max-width: 414px;
+    height: auto;
+    min-height: 100vh;
+    display: grid;
+    align-content: start;
+    grid-template-columns: calc(50%) calc(50%);
+}
+
+.fnbVmG {
+    margin: 0px auto;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    width: 180px;
+    height: 180px;
+    overflow: hidden;
+    padding: 10px;
+    border-radius: 13px;
+    transform: rotate(24deg) translateX(12px) translateY(12px);
+    background-size: cover;
+    background-color: rgb(253, 254, 184);
+    background-image: url(none);
+    cursor: pointer;
+    z-index: 2;
+}
+
+.fnbVmG2 {
+    margin: 0px auto;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    width: 180px;
+    height: 180px;
+    overflow: hidden;
+    padding: 10px;
+    border-radius: 13px;
+    transform: rotate(-24deg) translateX(12px) translateY(12px);
+    background-size: cover;
+    background-color: rgb(185, 242, 232);
+    background-image: url(none);
+    cursor: pointer;
+    z-index: 2;
+}
+
+.iqCTcf {
+    width: 100%;
+    will-change: transform;
+    text-align: center;
+    overflow: hidden;
+    word-break: break-all;
+    text-overflow: ellipsis;
+    color: rgb(0, 0, 0);
+    font-family: "Hi Melody";
+    font-size: 18px;
+    line-height: 2;
+}
+
 /*글을 추가해주세요*/
 .hxuTcC {
     font-family: "Noto Sans KR";
