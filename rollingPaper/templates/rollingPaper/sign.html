@@ -12,7 +12,12 @@
             <form action="./" method='post' name="fm" class="sc-ikXwZx hwCNyq">
                 {% csrf_token %}
                 <input placeholder="비밀번호" class="sc-uxeQQ jHEhAp" type="password" name="pwBoard" value="">
-                <a onclick="document.fm.submit()"><div class="sc-biJoGX gtjlvQ">인증</div></a>
+                <a onclick="window.location.href='/'">
+                    <div class="sc-biJoGX gtjlvW">뒤로가기</div>
+                </a>
+                <a onclick="document.fm.submit()">
+                    <div class="sc-biJoGX gtjlvQ">인증</div>
+                </a>
             </form>
         </div>
     </div>

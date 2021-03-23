@@ -9,6 +9,9 @@ import os
 def main(request) :
     if request.session.get('sign_complete', False):
         del request.session['sign_complete']
+        if request.session.get('master', False):
+            del request.session['master']
+        del request.session['board_name']
     return render(request, 'rollingPaper/main.html', {'view':"main"})
 
 class signView(View):
@@ -18,9 +21,19 @@ class signView(View):
     def post(self, request):
         _salt = os.urandom(16)
         hashedPw = hashlib.pbkdf2_hmac('sha256', request.POST['pwBoard'].encode(),_salt, 100000)
-        data = Board.objects.create(board_name=request.POST['txtName'], hashed_pw=hashedPw, salt=_salt)
+        masterPw = hashlib.pbkdf2_hmac('sha256', request.POST['masterPw'].encode(), _salt, 100000)
+
+        data = Board.objects.create(
+            board_name=request.POST['txtName'],
+            hashed_pw=hashedPw,
+            master_pw=masterPw,
+            salt=_salt
+        )
         data.save()
+
         request.session['sign_complete'] = data.pk
+        request.session['board_name'] = data.board_name
+
         return redirect('/'+str(data.pk))
 
 class listView(View):
@@ -35,7 +48,7 @@ class listView(View):
             return render(request, "rollingPaper/sign.html", {'view':"list"})
         else:
             post = Post.objects.filter(board_id=self.kwargs['pk'])
-            return render(request, "rollingPaper/list.html", {'view':"list", 'board_name':sql.first().board_name, 'post':post})
+            return render(request, "rollingPaper/list.html", {'view':"list", 'board_name':request.session.get('board_name', False), 'post':post})
 
     def post(self, request, *args, **kwargs):
 
@@ -45,8 +58,14 @@ class listView(View):
             infoBoard = sql.first()
             _salt = infoBoard.salt
             hashedPw = hashlib.pbkdf2_hmac('sha256', request.POST['pwBoard'].encode(), _salt, 100000)
-            if infoBoard.hashed_pw == hashedPw :
+
+            if infoBoard.master_pw == hashedPw :
                 request.session['sign_complete'] = self.kwargs['pk']
+                request.session['master'] = True
+                request.session['board_name'] = infoBoard.board_name
+            elif infoBoard.hashed_pw == hashedPw :
+                request.session['sign_complete'] = self.kwargs['pk']
+                request.session['board_name'] = infoBoard.board_name
             else :
                 raise Exception('비밀번호가 틀렸습니다.')
         except:
@@ -54,6 +73,19 @@ class listView(View):
             return render(request, "rollingPaper/sign.html", {'view':"sign", 'msg':"비밀번호가 틀렸습니다."})
         return redirect('./')
 
-def createBoard(request) :
-    # return redirect('../sign')
-    return redirect('rollingPaper:sign')
+
+class writeView(View):
+    def get(self, request, *args, **kwargs):
+        return render(request, "rollingPaper/write.html", {'view': "write", 'board_name':request.session.get('board_name', False)})
+    def post(self, request, *args, **kwargs):
+        _salt = os.urandom(16)
+        hashedPw = hashlib.pbkdf2_hmac('sha256', request.POST['pwPost'].encode(), _salt, 100000)
+
+        data = Post.objects.create(
+            board_id=Board.objects.filter(id=self.kwargs['pk'])[0],
+            hashed_pw=hashedPw, salt=_salt,
+            contents=request.POST['contents'],
+            nickname=request.POST['nickname']
+        )
+
+        return redirect('./')

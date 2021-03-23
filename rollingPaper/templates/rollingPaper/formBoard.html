@@ -13,10 +13,16 @@
                 <form action="{% url 'rollingPaper:sign' %}" method='post' name="fm" class="hwCNyq">
                     {% csrf_token %}
                     <input placeholder="방이름" class="jHEhAw" name="txtName" value="">
+                    <input placeholder="관리자 비밀번호" type="password" class="jHEhAw" name="masterPw" value="">
                     <input placeholder="비밀번호" type="password" class="jHEhAw" name="pwBoard" value="">
                     <div style="display: flex;">
                         <input placeholder="비밀번호 확인" type="password" class="jHEhAp" name="dblPwBoard" value="">
-                        <a onclick="if(document.getElementsByName('pwBoard')[0].value==document.getElementsByName('dblPwBoard')[0].value){document.fm.submit()}else{alert('비밀번호가 일치하지 않습니다.')}"><div class="sc-biJoGX gtjlvQ">생성</div></a>
+                        <a onclick="window.location.href='/'">
+                            <div class="sc-biJoGX gtjlvW">뒤로가기</div>
+                        </a>
+                        <a onclick="if(document.getElementsByName('pwBoard')[0].value==document.getElementsByName('dblPwBoard')[0].value){document.fm.submit()}else{alert('비밀번호가 일치하지 않습니다.')}">
+                            <div class="sc-biJoGX gtjlvQ">생성</div>
+                        </a>
                     </div>
                 </form>
             </div>

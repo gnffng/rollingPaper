@@ -1,19 +1,22 @@
 {% load rollingPaper_extras %}
 <html lang="ko">
 	<head>
-	  <meta charset="UTF-8">
-	  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
-	  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=3,minimum-scale=1,user-scalable=no,viewport-fit=cover">
-	  <style data-styled="active" data-styled-version="5.2.0">
-	  </style>
-	  {% load static %}
-	  <link rel="stylesheet" href="{% static 'css/base.css' %}">
-	  {% load static %}
-	  <link rel="stylesheet" href="{% static 'css/list.css' %}">
-	  <link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&amp;family=Hi+Melody&amp;family=Nanum+Brush+Script&amp;family=Nanum+Gothic&amp;display=swap" rel="stylesheet" type="text/css" data-react-helmet="true">
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=3,minimum-scale=1,user-scalable=no,viewport-fit=cover">
+		<style data-styled="active" data-styled-version="5.2.0">
+		</style>
+		{% load static %}
+		<link rel="stylesheet" href="{% static 'css/base.css' %}">
+		{% load static %}
+		<link rel="stylesheet" href="{% static 'css/list.css' %}">
+		{% load static %}
+		<link rel="stylesheet" href="{% static 'css/write.css' %}">
+		<link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&amp;family=Hi+Melody&amp;family=Nanum+Brush+Script&amp;family=Nanum+Gothic&amp;display=swap" rel="stylesheet" type="text/css" data-react-helmet="true">
 	</head>
 	<body class="">
+		<script>{% if msg %} alert('{{msg}}'); {% endif %}</script>
 		<div id="wrap">
 			<div class="sc-amjdv bckYVV">
 				<div class="sc-WZYaI hciJwR">
@@ -40,41 +43,32 @@
 							</div>
 						</div>
 
-						<div class="sc-iklIKw hkyHSX" style="opacity: 1;">
-							{{post|length}}개 작성
-						</div>
 						<section class="sc-daBvwG gTaSYg card">
-							{% if post|length == 0 %}
-							<section class="sc-pNWxx dryRrI">
-								<div class="sc-jrsJCI hxuTcC">
-									글을 추가해주세요!
+							<section class="sc-pNWxx hCEyrj">
+								<div class="sc-xGAYn lgEKKy">
+
+									<form action="" method='post' name="fm" style="width:100%">
+										{% csrf_token %}
+										<div class="sc-jSFkmK bEWEhJ">
+											<textarea color="#000000" spellcheck="false" class="eHpTMB" name="contents"></textarea>
+										</div>
+										<div class="sc-fuIRbl hXwWQH">
+											<span class="sc-fcmNTy eXNXqu">Password.</span>
+											<input placeholder="비밀번호" maxlength="8" class="sc-Gvgqn cUWXXc" name="pwPost">
+										</div>
+										<div class="sc-fuIRbl hXwWQH">
+											<span class="sc-fcmNTy eXNXqu">From.</span>
+											<input placeholder="보내는이" maxlength="8" class="sc-Gvgqn cUWXXc" name="nickname">
+										</div>
+									</form>
 								</div>
 							</section>
-							{% else %}
-							<div class="sc-jQAyEw dQaUcS card-wrapper">
-								{% for message in post %}
-									<div transform="rotate(5deg) translateX(7px) translateY(7px)" id="3209056"
-										 {% if forloop.counter0|mod:4 == 1 or forloop.counter0|mod:4 == 2 %}
-											class="sc-dlnjPT fnbVmG2"
-										 {% else %}
-											class="sc-dlnjPT fnbVmG"
-										 {% endif %}>
-										<div font-family="Hi Melody" color="#000000" class="sc-hKFyIo iqCTcf">
-											{{message.contents|truncatechars:"55"}}
-										</div>
-									</div>
-								{% endfor %}
-								<div class="sc-eKYRpg hCEyrj sentinel"></div>
-							</div>
-							{% endif %}
 						</section>
-						<div class="sc-fuIRbl fKFrpF" style="opacity: 1;">
-							<a href="./write">
-								<div class="sc-Gvgqn sc-gsWdvU emVMzr sScsW">
-									{% load static %}
-									<img src="{% static 'img/btn_write.svg' %}" alt="페이퍼 추가" class="sc-bXevSJ fwjTzB">
-								</div>
+						<div class="sc-gsWdvU cGnDyB">
+							<a href="./">
+								<button class="sc-gtssRu joUcBY" color="dark">뒤로가기</button>
 							</a>
+							<button class="sc-gtssRu joUcBY" color="dark" onclick="document.fm.submit()">저장</button>
 						</div>
 					</div>
 				</div>
