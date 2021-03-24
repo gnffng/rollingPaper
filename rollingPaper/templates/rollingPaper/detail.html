@@ -23,7 +23,7 @@
 						<div class="sc-lmgQde ZlFdb">
 							<div class="sc-giAqnE bfNSsg">
 								{% load static %}
-								<img src="/static/img/btn_back.svg" class="cgnnmn" onclick="window.location.href='./'" style="left: 24px;">
+								<img src="/static/img/btn_back.svg" class="cgnnmn" onclick="window.location.href='../'" style="left: 24px;">
 								{% load static %}
 								<img src="{% static 'img/btn_menu.svg' %}" class="sc-kLokih cgnnmn" onclick="document.getElementsByClassName('hugGxG')[0].style.display='block'">
 							</div>
@@ -51,10 +51,13 @@
 										</div>
 										<div class="sc-bShfyb cVbTct">
 											<div class="sc-juXuuo dStxsV">
-												<p class="sc-jlQhLH kInrbJ">From.</p>
-												<p class="sc-iXqwbG kcKXDR">말티젠</p>
+												<p class="sc-jlQhLH kInrbJ">From. {{message.nickname}}</p>
 											</div>
-											<img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzgiIGhlaWdodD0iMzgiIHZpZXdCb3g9IjAgMCAzOCAzOCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTkiIGN5PSIxOSIgcj0iMTguNSIgZmlsbD0id2hpdGUiIHN0cm9rZT0iI0M4QzhDOCIvPgo8cGF0aCBkPSJNOSAxMkgyOSIgc3Ryb2tlPSIjMjMyMzIzIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgo8cGF0aCBkPSJNMTEuMTMxNCAxMy4xMTY4QzExLjA2MTUgMTIuNTIyMyAxMS41MjYgMTIgMTIuMTI0NSAxMkgyNS44NzU1QzI2LjQ3NCAxMiAyNi45Mzg1IDEyLjUyMjMgMjYuODY4NiAxMy4xMTY4TDI1LjEwMzkgMjguMTE2OEMyNS4wNDQ3IDI4LjYyMDUgMjQuNjE3OCAyOSAyNC4xMTA4IDI5SDEzLjg4OTJDMTMuMzgyMiAyOSAxMi45NTUzIDI4LjYyMDUgMTIuODk2MSAyOC4xMTY4TDExLjEzMTQgMTMuMTE2OFoiIHN0cm9rZT0iIzIzMjMyMyIgc3Ryb2tlLXdpZHRoPSIyIi8+CjxyZWN0IHg9IjE1IiB5PSI5IiB3aWR0aD0iOCIgaGVpZ2h0PSIzIiByeD0iMSIgc3Ryb2tlPSIjMjMyMzIzIiBzdHJva2Utd2lkdGg9IjIiLz4KPHBhdGggZD0iTTE5IDE2TDE5IDI1IiBzdHJva2U9IiMyMzIzMjMiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CjxwYXRoIGQ9Ik0yMiAxNkwyMiAyNSIgc3Ryb2tlPSIjMjMyMzIzIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgo8cGF0aCBkPSJNMTYgMTZMMTYgMjUiIHN0cm9rZT0iIzIzMjMyMyIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KPC9zdmc+Cg==" class="sc-hYIrON gBHXty">
+											{% load static %}
+											<a href="../delete/{{message.id}}">
+												{% load static %}
+												<img src="{% static 'img/btn_delete.svg' %}" class="sc-hYIrON gBHXty">
+											</a>
 										</div>
 									</div>
 								{% endfor %}

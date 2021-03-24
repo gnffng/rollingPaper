@@ -90,7 +90,7 @@ class writeView(View):
             nickname=request.POST['nickname']
         )
 
-        return redirect('./')
+        return redirect('../')
 
 class detailView(View):
 
@@ -107,15 +107,21 @@ class deleteView(View):
         return render(request, "rollingPaper/delete.html", {})
 
     def post(self, request, *args, **kwargs):
-        sql = Post.objects.filter(board_id=self.kwargs['fk'], id=self.kwargs['pk'])
+        board = Board.objects.filter(id=self.kwargs['fk'])
+        post = Post.objects.filter(board_id=self.kwargs['fk'], id=self.kwargs['pk'])
 
         try:
-            obj = sql.get()
-            infoPost = sql.first()
-            _salt = infoPost.salt
-            hashedPw = hashlib.pbkdf2_hmac('sha256', request.POST['pwBoard'].encode(), _salt, 100000)
+            obj = post.get()
 
-            if infoPost.master_pw == hashedPw :
+            infoPost = post.first()
+            infoBoard = board.first()
+
+            saltPost = infoPost.salt
+            saltBoard = infoBoard.salt
+
+            hashedPw = hashlib.pbkdf2_hmac('sha256', request.POST['pwBoard'].encode(), saltBoard, 100000)
+
+            if infoBoard.master_pw == hashedPw :
                 obj.delete()
             elif infoPost.hashed_pw == hashedPw :
                 obj.delete()

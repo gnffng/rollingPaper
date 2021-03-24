@@ -51,7 +51,7 @@
 								</div>
 							</section>
 							{% else %}
-							<form action="./detail" method='post' name="fm">
+							<form action="./detail/" method='post' name="fm">
 								{% csrf_token %}
 								<div class="sc-jQAyEw dQaUcS card-wrapper">
 										<input type="hidden" name="goto">
@@ -75,7 +75,7 @@
 							{% endif %}
 						</section>
 						<div class="sc-fuIRbl fKFrpF" style="opacity: 1;">
-							<a href="./write">
+							<a href="./write/">
 								<div class="sc-Gvgqn sc-gsWdvU emVMzr sScsW">
 									{% load static %}
 									<img src="{% static 'img/btn_write.svg' %}" alt="페이퍼 추가" class="sc-bXevSJ fwjTzB">
