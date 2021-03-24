@@ -1,0 +1,84 @@
+{% load rollingPaper_extras %}
+<html lang="ko">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=3,minimum-scale=1,user-scalable=no,viewport-fit=cover">
+		<style data-styled="active" data-styled-version="5.2.0">
+		</style>
+		{% load static %}
+		<link rel="stylesheet" href="{% static 'css/base.css' %}">
+		{% load static %}
+	  	<link rel="stylesheet" href="{% static 'css/list.css' %}">
+		{% load static %}
+		<link rel="stylesheet" href="{% static 'css/detail.css' %}">
+		<link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&amp;family=Hi+Melody&amp;family=Nanum+Brush+Script&amp;family=Nanum+Gothic&amp;display=swap" rel="stylesheet" type="text/css" data-react-helmet="true">
+	</head>
+	<body class="">
+		<div id="wrap">
+			<div class="sc-amjdv bckYVV">
+				<div class="sc-WZYaI hciJwR">
+					<div class="sc-dFRpvv cQoJBr bg">
+						<div class="sc-lmgQde ZlFdb">
+							<div class="sc-giAqnE bfNSsg">
+								{% load static %}
+								<img src="/static/img/btn_back.svg" class="cgnnmn" onclick="window.location.href='./'" style="left: 24px;">
+								{% load static %}
+								<img src="{% static 'img/btn_menu.svg' %}" class="sc-kLokih cgnnmn" onclick="document.getElementsByClassName('hugGxG')[0].style.display='block'">
+							</div>
+							<div class="sc-iJCRLp hLvDVx">
+							</div>
+						</div>
+
+						<div class="sc-hHEjAm hugGxG" style="display:none">
+							<div class="sc-dlMBXb eXQdyn">
+							{% load static %}
+								<img src="{% static 'img/btn_close.svg' %}" class="sc-kfYqjs jpcbJh" onclick="document.getElementsByClassName('hugGxG')[0].style.display='none'">
+								<a href="{% url 'rollingPaper:main' %}"><h2 class="sc-fKgIGh efpGaJ">메인 홈</h2></a>
+								<h2 id="kakao-link-btn" class="sc-fKgIGh efpGaJ">공유하기</h2>
+								<div class="sc-bCwgka kQzQQm">
+								</div>
+								<a href="sms:01084454677"><h4 class="sc-iwaifL gSkynp">문의하기</h4></a>
+							</div>
+						</div>
+						<section class="sc-daBvwG gTaSYg card">
+							<div class="sc-jQAyEw dQaUcS card-wrapper">
+								{% for message in post %}
+									<div class="sc-dlnjPT fnbVmG" id="{{message.id}}">
+										<div font-family="Hi Melody" color="#000000" class="sc-hKFyIo iqCTcf">
+											{{message.contents|truncatechars:"55"}}
+										</div>
+										<div class="sc-bShfyb cVbTct">
+											<div class="sc-juXuuo dStxsV">
+												<p class="sc-jlQhLH kInrbJ">From.</p>
+												<p class="sc-iXqwbG kcKXDR">말티젠</p>
+											</div>
+											<img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzgiIGhlaWdodD0iMzgiIHZpZXdCb3g9IjAgMCAzOCAzOCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTkiIGN5PSIxOSIgcj0iMTguNSIgZmlsbD0id2hpdGUiIHN0cm9rZT0iI0M4QzhDOCIvPgo8cGF0aCBkPSJNOSAxMkgyOSIgc3Ryb2tlPSIjMjMyMzIzIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgo8cGF0aCBkPSJNMTEuMTMxNCAxMy4xMTY4QzExLjA2MTUgMTIuNTIyMyAxMS41MjYgMTIgMTIuMTI0NSAxMkgyNS44NzU1QzI2LjQ3NCAxMiAyNi45Mzg1IDEyLjUyMjMgMjYuODY4NiAxMy4xMTY4TDI1LjEwMzkgMjguMTE2OEMyNS4wNDQ3IDI4LjYyMDUgMjQuNjE3OCAyOSAyNC4xMTA4IDI5SDEzLjg4OTJDMTMuMzgyMiAyOSAxMi45NTUzIDI4LjYyMDUgMTIuODk2MSAyOC4xMTY4TDExLjEzMTQgMTMuMTE2OFoiIHN0cm9rZT0iIzIzMjMyMyIgc3Ryb2tlLXdpZHRoPSIyIi8+CjxyZWN0IHg9IjE1IiB5PSI5IiB3aWR0aD0iOCIgaGVpZ2h0PSIzIiByeD0iMSIgc3Ryb2tlPSIjMjMyMzIzIiBzdHJva2Utd2lkdGg9IjIiLz4KPHBhdGggZD0iTTE5IDE2TDE5IDI1IiBzdHJva2U9IiMyMzIzMjMiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CjxwYXRoIGQ9Ik0yMiAxNkwyMiAyNSIgc3Ryb2tlPSIjMjMyMzIzIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgo8cGF0aCBkPSJNMTYgMTZMMTYgMjUiIHN0cm9rZT0iIzIzMjMyMyIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KPC9zdmc+Cg==" class="sc-hYIrON gBHXty">
+										</div>
+									</div>
+								{% endfor %}
+								<div class="sc-eKYRpg hCEyrj sentinel"></div>
+							</div>
+						</section>
+					</div>
+				</div>
+			</div>
+		</div>
+	<script>
+		jQuery('#kakao-link-btn').click(function() {
+		  var t = document.createElement("textarea");
+		  document.body.appendChild(t);
+		  t.value = window.location.href;
+		  t.select();
+		  document.execCommand('copy');
+		  document.body.removeChild(t);
+		  alert('클립보드에 복사되었습니다!');
+		});
+
+		{% if goto != null %}
+			window.location.href="#{{goto}}";
+		{% endif %}
+	</script>
+	</body>
+</html>

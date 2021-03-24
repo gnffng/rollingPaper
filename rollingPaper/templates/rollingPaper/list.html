@@ -51,21 +51,27 @@
 								</div>
 							</section>
 							{% else %}
-							<div class="sc-jQAyEw dQaUcS card-wrapper">
-								{% for message in post %}
-									<div transform="rotate(5deg) translateX(7px) translateY(7px)" id="3209056"
-										 {% if forloop.counter0|mod:4 == 1 or forloop.counter0|mod:4 == 2 %}
-											class="sc-dlnjPT fnbVmG2"
-										 {% else %}
-											class="sc-dlnjPT fnbVmG"
-										 {% endif %}>
-										<div font-family="Hi Melody" color="#000000" class="sc-hKFyIo iqCTcf">
-											{{message.contents|truncatechars:"55"}}
+							<form action="./detail" method='post' name="fm">
+								{% csrf_token %}
+								<div class="sc-jQAyEw dQaUcS card-wrapper">
+										<input type="hidden" name="goto">
+										{% for message in post %}
+										<div transform="rotate(5deg) translateX(7px) translateY(7px)" id="3209056"
+											{% if forloop.counter0|mod:4 == 1 or forloop.counter0|mod:4 == 2 %}
+												class="sc-dlnjPT fnbVmG2"
+											{% else %}
+												class="sc-dlnjPT fnbVmG"
+											{% endif %}
+											onclick="goto({{message.id}})">
+
+											<div font-family="Hi Melody" color="#000000" class="sc-hKFyIo iqCTcf">
+												{{message.contents|truncatechars:"55"}}
+											</div>
 										</div>
-									</div>
-								{% endfor %}
-								<div class="sc-eKYRpg hCEyrj sentinel"></div>
-							</div>
+										{% endfor %}
+									<div class="sc-eKYRpg hCEyrj sentinel"></div>
+								</div>
+							</form>
 							{% endif %}
 						</section>
 						<div class="sc-fuIRbl fKFrpF" style="opacity: 1;">
@@ -90,6 +96,11 @@
 		  document.body.removeChild(t);
 		  alert('클립보드에 복사되었습니다!');
 		});
+
+		function goto(id){
+			document.getElementsByName("goto")[0].value=id;
+			document.fm.submit();
+		}
 	</script>
 	</body>
 </html>

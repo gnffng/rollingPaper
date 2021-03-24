@@ -1,0 +1,14 @@
+.dQaUcS {
+    grid-template-columns: calc(100%);
+}
+
+.fnbVmG {
+    width: calc(min(414px, 100vw) - 48px);
+    height: calc(min(414px, 100vw) - 48px);
+    transform: rotate(0) translateX(0) translateY(0);
+    margin: auto auto 20px auto;
+}
+
+.iqCTcf {
+    font-size: 25px;
+}

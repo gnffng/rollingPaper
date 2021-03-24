@@ -75,8 +75,10 @@ class listView(View):
 
 
 class writeView(View):
+
     def get(self, request, *args, **kwargs):
         return render(request, "rollingPaper/write.html", {'view': "write", 'board_name':request.session.get('board_name', False)})
+
     def post(self, request, *args, **kwargs):
         _salt = os.urandom(16)
         hashedPw = hashlib.pbkdf2_hmac('sha256', request.POST['pwPost'].encode(), _salt, 100000)
@@ -89,3 +91,39 @@ class writeView(View):
         )
 
         return redirect('./')
+
+class detailView(View):
+
+    def get(self, request, *args, **kwargs):
+        return redirect("./")
+
+    def post(self, request, *args, **kwargs):
+        post = Post.objects.filter(board_id=self.kwargs['pk'])
+        return render(request, "rollingPaper/detail.html", {'view': "detail", 'post': post, 'goto': request.POST["goto"]})
+
+class deleteView(View):
+
+    def get(self, request, *args, **kwargs):
+        return render(request, "rollingPaper/delete.html", {})
+
+    def post(self, request, *args, **kwargs):
+        sql = Post.objects.filter(board_id=self.kwargs['fk'], id=self.kwargs['pk'])
+
+        try:
+            obj = sql.get()
+            infoPost = sql.first()
+            _salt = infoPost.salt
+            hashedPw = hashlib.pbkdf2_hmac('sha256', request.POST['pwBoard'].encode(), _salt, 100000)
+
+            if infoPost.master_pw == hashedPw :
+                obj.delete()
+            elif infoPost.hashed_pw == hashedPw :
+                obj.delete()
+            else :
+                raise Exception('비밀번호가 틀렸습니다.')
+        except:
+            print("error")
+            return render(request, ".../", {'view':"sign", 'msg':"비밀번호가 틀렸습니다."})
+
+
+        return render(request, "rollingPaper/detail.html", {'view': "detail", 'post': post, 'goto': request.POST["goto"]})

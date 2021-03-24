@@ -1,0 +1,25 @@
+{% extends 'rollingPaper/base.html' %}
+{% block content %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/sign.css' %}">
+    <div class="sc-jQAyEw flameU">
+        <div class="sc-dkQUut fKLEUn">
+            <p class="sc-WZYaI hciJwR">비밀번호를
+                <span class="sc-bXevSJ fwjTzB">입력하고,</span>
+                삭제버튼을
+                <span class="sc-bXevSJ fwjTzB">눌러</span>주세요.
+            </p>
+            <form action="./" method='post' name="fm" class="sc-ikXwZx hwCNyq">
+                {% csrf_token %}
+                <input placeholder="비밀번호" class="sc-uxeQQ jHEhAp" type="password" name="pwBoard" value="">
+                <a onclick="window.location.href='/'">
+                    <div class="sc-biJoGX gtjlvW">뒤로가기</div>
+                </a>
+                <a onclick="document.fm.submit()">
+                    <div class="sc-biJoGX gtjlvQ">삭제</div>
+                </a>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
