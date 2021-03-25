@@ -75,11 +75,15 @@ class listView(View):
 
 
 class writeView(View):
-
     def get(self, request, *args, **kwargs):
+        if request.session.get('sign_complete', False) != self.kwargs['pk']:
+            return redirect("/?msg=세션이 만료되었습니다.")
         return render(request, "rollingPaper/write.html", {'view': "write", 'board_name':request.session.get('board_name', False)})
 
     def post(self, request, *args, **kwargs):
+        if request.session.get('sign_complete', False) != self.kwargs['pk']:
+            return redirect("/?msg=세션이 만료되었습니다.")
+
         _salt = os.urandom(16)
         hashedPw = hashlib.pbkdf2_hmac('sha256', request.POST['pwPost'].encode(), _salt, 100000)
 
@@ -93,20 +97,32 @@ class writeView(View):
         return redirect('../')
 
 class detailView(View):
-
     def get(self, request, *args, **kwargs):
+        if request.session.get('sign_complete', False) != self.kwargs['pk']:
+            return redirect("/?msg=세션이 만료되었습니다.")
+
         return redirect("./")
 
     def post(self, request, *args, **kwargs):
+        if request.session.get('sign_complete', False) != self.kwargs['pk']:
+            return redirect("/?msg=세션이 만료되었습니다.")
+
         post = Post.objects.filter(board_id=self.kwargs['pk'])
         return render(request, "rollingPaper/detail.html", {'view': "detail", 'post': post, 'goto': request.POST["goto"]})
 
 class deleteView(View):
 
     def get(self, request, *args, **kwargs):
-        return render(request, "rollingPaper/delete.html", {})
+        if request.session.get('sign_complete', False) != self.kwargs['fk']:
+            return redirect("/?msg=세션이 만료되었습니다.")
+
+        return render(request, "rollingPaper/delete.html", {'view':"delete", 'fk':self.kwargs['fk']})
 
     def post(self, request, *args, **kwargs):
+        if request.session.get('sign_complete', False) != self.kwargs['fk']:
+            return redirect("/?msg=세션이 만료되었습니다."
+                            "")
+
         board = Board.objects.filter(id=self.kwargs['fk'])
         post = Post.objects.filter(board_id=self.kwargs['fk'], id=self.kwargs['pk'])
 
@@ -119,17 +135,19 @@ class deleteView(View):
             saltPost = infoPost.salt
             saltBoard = infoBoard.salt
 
-            hashedPw = hashlib.pbkdf2_hmac('sha256', request.POST['pwBoard'].encode(), saltBoard, 100000)
+            hashedBoardPw = hashlib.pbkdf2_hmac('sha256', request.POST['pwBoard'].encode(), saltBoard, 100000)
+            hashedPostPw = hashlib.pbkdf2_hmac('sha256', request.POST['pwBoard'].encode(), saltPost, 100000)
 
-            if infoBoard.master_pw == hashedPw :
+            if infoBoard.master_pw == hashedBoardPw :
                 obj.delete()
-            elif infoPost.hashed_pw == hashedPw :
+                # print("del")
+            elif infoPost.hashed_pw == hashedPostPw :
                 obj.delete()
+                # print("del")
             else :
-                raise Exception('비밀번호가 틀렸습니다.')
+                raise Exception
         except:
-            print("error")
-            return render(request, ".../", {'view':"sign", 'msg':"비밀번호가 틀렸습니다."})
+            return render(request, "rollingPaper/delete.html", {'view':"delete", 'fk':self.kwargs['fk'], 'msg':"비밀번호가 틀렸습니다."})
 
-
-        return render(request, "rollingPaper/detail.html", {'view': "detail", 'post': post, 'goto': request.POST["goto"]})
+        return redirect("/"+str(self.kwargs['fk']))
+        # return render(request, "rollingPaper/main.html", {'view': "detail", 'post': post})
